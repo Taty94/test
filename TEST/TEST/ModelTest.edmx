@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbtestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="proveedor_id" />
+          </Key>
+          <Property Name="proveedor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proveedor_ruc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="proveedor_nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="proveedor_direccion" Type="varchar(max)" />
+          <Property Name="proveedor_email" Type="varchar(max)" />
+          <Property Name="proveedor_telefono" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ventas">
+          <Key>
+            <PropertyRef Name="ventas_id" />
+          </Key>
+          <Property Name="ventas_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ventas_idproveedor" Type="int" Nullable="false" />
+          <Property Name="ventas_producto" Type="varchar(max)" />
+          <Property Name="ventas_descripcion" Type="varchar(max)" />
+          <Property Name="ventas_fecha" Type="datetime" Nullable="false" />
+          <Property Name="ventas_total" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="dbtestModelStoreContainer">
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ventas" EntityType="Self.ventas" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbtestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="proveedor_id" />
+          </Key>
+          <Property Name="proveedor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proveedor_ruc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="proveedor_nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="proveedor_direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor_telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ventas">
+          <Key>
+            <PropertyRef Name="ventas_id" />
+          </Key>
+          <Property Name="ventas_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ventas_idproveedor" Type="Int32" Nullable="false" />
+          <Property Name="ventas_producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ventas_descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ventas_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ventas_total" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="dbtestEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" />
+          <EntitySet Name="ventas" EntityType="Self.ventas" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbtestModelStoreContainer" CdmEntityContainer="dbtestEntities1">
+          <EntitySetMapping Name="proveedor">
+            <EntityTypeMapping TypeName="dbtestModel.proveedor">
+              <MappingFragment StoreEntitySet="proveedor">
+                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+                <ScalarProperty Name="proveedor_ruc" ColumnName="proveedor_ruc" />
+                <ScalarProperty Name="proveedor_nombre" ColumnName="proveedor_nombre" />
+                <ScalarProperty Name="proveedor_direccion" ColumnName="proveedor_direccion" />
+                <ScalarProperty Name="proveedor_email" ColumnName="proveedor_email" />
+                <ScalarProperty Name="proveedor_telefono" ColumnName="proveedor_telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ventas">
+            <EntityTypeMapping TypeName="dbtestModel.ventas">
+              <MappingFragment StoreEntitySet="ventas">
+                <ScalarProperty Name="ventas_id" ColumnName="ventas_id" />
+                <ScalarProperty Name="ventas_idproveedor" ColumnName="ventas_idproveedor" />
+                <ScalarProperty Name="ventas_producto" ColumnName="ventas_producto" />
+                <ScalarProperty Name="ventas_descripcion" ColumnName="ventas_descripcion" />
+                <ScalarProperty Name="ventas_fecha" ColumnName="ventas_fecha" />
+                <ScalarProperty Name="ventas_total" ColumnName="ventas_total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbtestModelStoreContainer" CdmEntityContainer="dbtestEntities1">
+    <EntitySetMapping Name="proveedor">
+      <EntityTypeMapping TypeName="dbtestModel.proveedor">
+        <MappingFragment StoreEntitySet="proveedor">
+          <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+          <ScalarProperty Name="proveedor_ruc" ColumnName="proveedor_ruc" />
+          <ScalarProperty Name="proveedor_nombre" ColumnName="proveedor_nombre" />
+          <ScalarProperty Name="proveedor_direccion" ColumnName="proveedor_direccion" />
+          <ScalarProperty Name="proveedor_email" ColumnName="proveedor_email" />
+          <ScalarProperty Name="proveedor_telefono" ColumnName="proveedor_telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ventas">
+      <EntityTypeMapping TypeName="dbtestModel.ventas">
+        <MappingFragment StoreEntitySet="ventas">
+          <ScalarProperty Name="ventas_id" ColumnName="ventas_id" />
+          <ScalarProperty Name="ventas_idproveedor" ColumnName="ventas_idproveedor" />
+          <ScalarProperty Name="ventas_producto" ColumnName="ventas_producto" />
+          <ScalarProperty Name="ventas_descripcion" ColumnName="ventas_descripcion" />
+          <ScalarProperty Name="ventas_fecha" ColumnName="ventas_fecha" />
+          <ScalarProperty Name="ventas_total" ColumnName="ventas_total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

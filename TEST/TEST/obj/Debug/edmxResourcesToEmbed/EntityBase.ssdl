@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbtestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="proveedor">
+    <Key>
+      <PropertyRef Name="proveedor_id" />
+    </Key>
+    <Property Name="proveedor_id" Type="int" Nullable="false" />
+    <Property Name="proveedor_ruc" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="proveedor_nombre" Type="varchar(max)" Nullable="false" />
+    <Property Name="proveedor_direccion" Type="varchar(max)" />
+    <Property Name="proveedor_email" Type="varchar(max)" />
+    <Property Name="proveedor_telefono" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="ventas">
+    <Key>
+      <PropertyRef Name="ventas_id" />
+    </Key>
+    <Property Name="ventas_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ventas_idproveedor" Type="int" Nullable="false" />
+    <Property Name="ventas_producto" Type="varchar(max)" />
+    <Property Name="ventas_descripcion" Type="varchar(max)" />
+    <Property Name="ventas_fecha" Type="datetime" Nullable="false" />
+    <Property Name="ventas_total" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <Association Name="FK_ventas_idproveedor">
+    <End Role="proveedor" Type="Self.proveedor" Multiplicity="1" />
+    <End Role="ventas" Type="Self.ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedor">
+        <PropertyRef Name="proveedor_id" />
+      </Principal>
+      <Dependent Role="ventas">
+        <PropertyRef Name="ventas_idproveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbtestModelStoreContainer">
+    <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ventas" EntityType="Self.ventas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ventas_idproveedor" Association="Self.FK_ventas_idproveedor">
+      <End Role="proveedor" EntitySet="proveedor" />
+      <End Role="ventas" EntitySet="ventas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

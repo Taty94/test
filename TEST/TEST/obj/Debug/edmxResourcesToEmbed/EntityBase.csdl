@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbtestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="proveedor">
+    <Key>
+      <PropertyRef Name="proveedor_id" />
+    </Key>
+    <Property Name="proveedor_id" Type="Int32" Nullable="false" />
+    <Property Name="proveedor_ruc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="proveedor_nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="proveedor_direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="proveedor_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="proveedor_telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ventas" Relationship="Self.FK_ventas_idproveedor" FromRole="proveedor" ToRole="ventas" />
+  </EntityType>
+  <EntityType Name="ventas">
+    <Key>
+      <PropertyRef Name="ventas_id" />
+    </Key>
+    <Property Name="ventas_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ventas_idproveedor" Type="Int32" Nullable="false" />
+    <Property Name="ventas_producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ventas_descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ventas_fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ventas_total" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="proveedor" Relationship="Self.FK_ventas_idproveedor" FromRole="ventas" ToRole="proveedor" />
+  </EntityType>
+  <Association Name="FK_ventas_idproveedor">
+    <End Role="proveedor" Type="Self.proveedor" Multiplicity="1" />
+    <End Role="ventas" Type="Self.ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedor">
+        <PropertyRef Name="proveedor_id" />
+      </Principal>
+      <Dependent Role="ventas">
+        <PropertyRef Name="ventas_idproveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbtestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="proveedor" EntityType="Self.proveedor" />
+    <EntitySet Name="ventas" EntityType="Self.ventas" />
+    <AssociationSet Name="FK_ventas_idproveedor" Association="Self.FK_ventas_idproveedor">
+      <End Role="proveedor" EntitySet="proveedor" />
+      <End Role="ventas" EntitySet="ventas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
